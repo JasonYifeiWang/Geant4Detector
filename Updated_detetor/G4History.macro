@@ -1,0 +1,4 @@
+/globalField/verbose 1
+/run/beamOn 10000
+/analysis/h1/getVector
+/analysis/h2/getVector

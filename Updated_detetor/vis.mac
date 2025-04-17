@@ -1,0 +1,67 @@
+/run/initialize
+
+# Open OpenGL view window of size 1000x1000
+/vis/open OGL 1000x1000-0+0
+
+# Disable auto-refresh and set verbosity for visualization
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+
+# Draw the geometry (structure of the detector)
+# You can enable this to draw the geometry in the OpenGL window
+/vis/drawVolume
+
+# Set the viewpoint for better visual perspective (adjust Theta, Phi for better view)
+/vis/viewer/set/viewpointThetaPhi 120 150  # Set the perspective view
+
+# Set zoom value (1.0 is standard, increase to zoom out or decrease to zoom in)
+/vis/viewer/zoom 1.0
+
+# Prettify the detector by adjusting visibility and opacity of different volumes
+/vis/geometry/set/visibility World 0 true    # Set World visibility
+/vis/viewer/set/style surface                 # Set the style to "surface"
+/vis/geometry/set/colour World 0 0 0 1 0.2    # Blue for World, 30% opacity
+/vis/geometry/set/colour Tracker1 1 0 0 1 1  # Red for inner Lead Ball Tracker (100% opacity)
+  
+# Set transparency and colors for outer trackers for better distinction
+/vis/geometry/set/colour Tracker2 0 1 0 1 0.7  # Green for Tracker2 (Silicon sphere), 70% opacity
+/vis/geometry/set/colour Tracker3 0.5 0.5 0.5 1 0.5 # Gray for Tracker3 (Lead outer), 50% opacity
+/vis/geometry/set/colour Tracker4 1 1 0 1 0.4  # Yellow for Tracker4 (Scintillator outer), 40% opacity
+
+# Customize Tracker 5-10 visual appearance
+/vis/geometry/set/colour Tracker5 0 0 1 1 0.6  # Blue for Tracker5 (Outer Tracker 1), 60% opacity
+/vis/geometry/set/colour Tracker6 0.5 0 0.5 1 0.6  # Purple for Tracker6 (Outer Tracker 2), 60% opacity
+/vis/geometry/set/colour Tracker7 1 0.5 0 1 0.6  # Orange for Tracker7 (Outer Tracker 3), 60% opacity
+/vis/geometry/set/colour Tracker8 0 1 1 1 0.6  # Cyan for Tracker8 (Outer Tracker 4), 60% opacity
+/vis/geometry/set/colour Tracker9 1 0.5 1 1 0.6  # Pink for Tracker9 (Outer Tracker 5), 60% opacity
+/vis/geometry/set/colour Tracker10 0.5 0.5 1 1 0.6 # Light Blue for Tracker10 (Outer Tracker 6), 60% opacity
+
+# Enable smooth trajectory drawing, colored by particle type
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByParticleID
+
+# Color-code particles' trajectories by particle type (for example, e-, e+, mu-, mu+, etc.)
+/vis/modeling/trajectories/drawByParticleID-0/set e- red
+/vis/modeling/trajectories/drawByParticleID-0/set e+ red
+/vis/modeling/trajectories/drawByParticleID-0/set mu- pink
+/vis/modeling/trajectories/drawByParticleID-0/set mu+ pink
+/vis/modeling/trajectories/drawByParticleID-0/set gamma green
+/vis/modeling/trajectories/drawByParticleID-0/set neutron yellow
+/vis/modeling/trajectories/drawByParticleID-0/set proton cyan
+/vis/modeling/trajectories/drawByParticleID-0/set nu_e grey
+
+# Control visibility of step points (can be turned on/off to reduce clutter)
+/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts false
+
+# Show hits at the end of the event (optional, adds more detail)
+/vis/scene/add/hits
+
+# Accumulate all events in the scene to superimpose them
+/vis/scene/endOfEventAction accumulate
+
+# Re-enable auto-refresh and verbosity
+/vis/viewer/set/autoRefresh true
+/vis/verbose warnings
+
+# Increase display list limit to avoid warnings (useful for large visualizations)
+/vis/ogl/set/displayListLimit 9999999
