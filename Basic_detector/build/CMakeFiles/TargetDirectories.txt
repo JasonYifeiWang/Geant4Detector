@@ -1,0 +1,3 @@
+/home/s2155437/Desktop/proj3/Basic_detector/build/CMakeFiles/MyProgram.dir
+/home/s2155437/Desktop/proj3/Basic_detector/build/CMakeFiles/edit_cache.dir
+/home/s2155437/Desktop/proj3/Basic_detector/build/CMakeFiles/rebuild_cache.dir
